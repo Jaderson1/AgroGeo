@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtualenv
+.venv/
+venv/
+
+# Environment
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Geospatial / raster data
+*.tif
+*.tiff
+*.jp2
+*.gpkg
+*.shp
+*.shx
+*.dbf
+*.prj
+*.qgz
+
+data/
