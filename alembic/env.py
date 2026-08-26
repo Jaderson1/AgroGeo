@@ -16,12 +16,31 @@ if config.config_file_name is not None:
 target_metadata = Base.metadata
 
 
+def incluir_objeto(
+    object,
+    name,
+    type_,
+    reflected,
+    compare_to,
+):
+    """
+    Impede que o Alembic tente gerenciar tabelas internas
+    criadas pelas extensões PostGIS, Tiger e Topology.
+    """
+
+    if type_ == "table" and reflected and compare_to is None:
+        return False
+
+    return True
+
+
 def run_migrations_offline() -> None:
     context.configure(
         url=settings.database_url,
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
+        include_object=incluir_objeto,
     )
 
     with context.begin_transaction():
@@ -36,7 +55,11 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
-        context.configure(connection=connection, target_metadata=target_metadata)
+        context.configure(
+            connection=connection,
+            target_metadata=target_metadata,
+            include_object=incluir_objeto,
+        )
 
         with context.begin_transaction():
             context.run_migrations()
