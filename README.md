@@ -1,72 +1,88 @@
 # AgroGeo
 
-Projeto de geotecnologia aplicado ao agronegócio, combinando desenvolvimento backend, banco geoespacial e sensoriamento remoto.
+Projeto de geoprocessamento aplicado ao agronegócio, unindo backend, banco espacial e ferramentas GIS.
 
-## Stack inicial
+## Tecnologias
 
-- Python 3.12
-- FastAPI
-- PostgreSQL 16
-- PostGIS
-- SQLAlchemy 2
-- GeoAlchemy2
-- Alembic
-- Docker / Docker Compose
+* Python
+* FastAPI
+* PostgreSQL/PostGIS
+* SQLAlchemy
+* GeoAlchemy2
+* Alembic
+* Docker
+* QGIS
 
-## Objetivo do projeto
+## Funcionalidades atuais
 
-Construir uma API capaz de cadastrar propriedades e talhões, armazenar geometrias no PostGIS, integrar dados com QGIS e posteriormente processar imagens de satélite para cálculo de NDVI.
+* Cadastro de talhões via GeoJSON
+* Armazenamento de geometrias `Polygon` no PostGIS
+* SRID 4326
+* Índice espacial GiST
+* Listagem de talhões
+* Consulta por ID
+* Conversão PostGIS → GeoJSON
+* Cálculo de área em hectares
 
-## Roadmap
+## Exemplo
 
-- [x] Estrutura inicial da API
-- [x] PostgreSQL + PostGIS via Docker
-- [x] Modelo geoespacial inicial de talhão
-- [ ] Migrations com Alembic
-- [ ] CRUD de propriedades e talhões
-- [ ] Entrada e saída em GeoJSON
-- [ ] Cálculo de área em hectares
-- [ ] Conexão do QGIS com PostGIS
-- [ ] Consultas espaciais
-- [ ] Sentinel-2
-- [ ] NDVI
-- [ ] Histórico de NDVI por talhão
-
-## Como rodar
-
-1. Copie o arquivo de ambiente:
-
-```bash
-cp .env.example .env
+```json
+{
+  "name": "Talhao Teste",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [-54.585, -25.516],
+        [-54.580, -25.516],
+        [-54.580, -25.510],
+        [-54.585, -25.510],
+        [-54.585, -25.516]
+      ]
+    ]
+  }
+}
 ```
 
-No Windows PowerShell:
-
-```powershell
-Copy-Item .env.example .env
-```
-
-2. Suba os containers:
-
-```bash
-docker compose up --build
-```
-
-3. Abra:
-
-- API: http://localhost:8000
-- Swagger: http://localhost:8000/docs
-- Healthcheck: http://localhost:8000/health
-
-## Estrutura
+## Endpoints
 
 ```text
-app/
-├── api/
-├── core/
-├── db/
-├── models/
-├── schemas/
-├── services/
-└── main.py
+POST /fields
+GET  /fields
+GET  /fields/{id}
 ```
+
+Swagger:
+
+```text
+http://localhost:8000/docs
+```
+
+## Executando
+
+```bash
+docker compose up -d --build
+```
+
+## Arquitetura
+
+```text
+FastAPI
+   ↓
+PostgreSQL + PostGIS
+   ↑
+  QGIS
+```
+
+## Próximos passos
+
+* [ ] Integração com QGIS
+* [ ] Mapas temáticos
+* [ ] Consultas espaciais avançadas
+* [ ] Sentinel-2
+* [ ] NDVI
+* [ ] SAVI
+
+## Objetivo
+
+Aprofundar conhecimentos em desenvolvimento de software, geoprocessamento, bancos de dados espaciais e sensoriamento remoto aplicados ao agronegócio.
