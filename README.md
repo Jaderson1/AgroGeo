@@ -17,14 +17,16 @@ Projeto de geoprocessamento aplicado ao agronegócio, unindo backend, banco espa
 
 * Cadastro de talhões via GeoJSON
 * Armazenamento de geometrias `Polygon` no PostGIS
-* SRID 4326
+* Uso do SRID 4326
 * Índice espacial GiST
 * Listagem de talhões
-* Consulta por ID
+* Consulta de talhão por ID
 * Conversão PostGIS → GeoJSON
 * Cálculo de área em hectares
+* Integração do PostGIS com QGIS
+* Visualização dos talhões sobre mapa base OpenStreetMap
 
-## Exemplo
+## Exemplo de talhão
 
 ```json
 {
@@ -58,7 +60,7 @@ Swagger:
 http://localhost:8000/docs
 ```
 
-## Executando
+## Executando o projeto
 
 ```bash
 docker compose up -d --build
@@ -67,22 +69,43 @@ docker compose up -d --build
 ## Arquitetura
 
 ```text
-FastAPI
-   ↓
-PostgreSQL + PostGIS
-   ↑
-  QGIS
+            FastAPI
+               ↓
+      PostgreSQL + PostGIS
+               ↑
+              QGIS
+               ↓
+         OpenStreetMap
 ```
 
-## Próximos passos
+A API e o QGIS utilizam o mesmo banco PostGIS como fonte de dados.
 
-* [ ] Integração com QGIS
+## Status
+
+* [x] FastAPI
+* [x] PostgreSQL/PostGIS
+* [x] Docker
+* [x] GeoJSON
+* [x] Polygon com SRID 4326
+* [x] Índice espacial GiST
+* [x] Cálculo de área em hectares
+* [x] Integração com QGIS
+* [x] Visualização sobre OpenStreetMap
 * [ ] Mapas temáticos
 * [ ] Consultas espaciais avançadas
-* [ ] Sentinel-2
+* [ ] Imagens Sentinel-2
 * [ ] NDVI
 * [ ] SAVI
 
+## Próximos passos
+
+* Criar mapas temáticos no QGIS
+* Explorar consultas espaciais com PostGIS
+* Trabalhar com dados raster
+* Integrar imagens Sentinel-2
+* Calcular NDVI e SAVI
+* Relacionar indicadores de vegetação aos talhões
+
 ## Objetivo
 
-Aprofundar conhecimentos em desenvolvimento de software, geoprocessamento, bancos de dados espaciais e sensoriamento remoto aplicados ao agronegócio.
+Aprofundar conhecimentos em desenvolvimento de software, bancos de dados espaciais, geoprocessamento e sensoriamento remoto aplicados ao agronegócio.
