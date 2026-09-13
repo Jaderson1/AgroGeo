@@ -99,7 +99,6 @@ A API e o QGIS utilizam o mesmo banco PostGIS como fonte de dados.
 
 ## Próximos passos
 
-* Criar mapas temáticos no QGIS
 * Explorar consultas espaciais com PostGIS
 * Trabalhar com dados raster
 * Integrar imagens Sentinel-2
